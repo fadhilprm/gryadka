@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<title>Brand New Demo 2!</title>
+</head>
+
+<body>
+<p>Your Name<input data-bind="value: name" /></p>
+<h2>Hello, <span data-bind="text: fullName"> </span>!</h2>
+
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+ --><script src="webjars/knockout/3.4.0/knockout.js"></script>
+<script type="text/javascript">
+
+var ViewModel = function(first) {
+    this.name = ko.observable(first);
+ 
+    this.fullName = ko.pureComputed(function() {
+       return this.name() ;
+    }, this);
+};
+ 
+ko.applyBindings(new ViewModel(""));
+
+
+</script>
+</body>
+</html>

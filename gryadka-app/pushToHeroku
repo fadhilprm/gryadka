@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+APP_NAME=knockdemo
+heroku container:push web -a knockdemo
+
+

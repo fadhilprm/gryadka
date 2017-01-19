@@ -1,0 +1,42 @@
+group = appGroupName
+version = appVersion
+
+
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'docker'
+
+task pushToHeroku(type: Exec,dependsOn: build) {
+	commandLine './pushToHeroku'
+}
+
+build.finalizedBy(pushToHeroku)
+
+
+
+
+jar {
+	baseName = 'gryadka-app'
+	version = appVersion
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.webjars:knockout:3.4.0')
+	compile('com.Gryadka.app:gryadka-ui:'+uiReleaseVersion)
+	compile('com.Gryadka.app:gryadka-core:'+coreReleaseVersion)
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+}
+
+
+eclipse {
+	classpath {
+		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+	}
+}
